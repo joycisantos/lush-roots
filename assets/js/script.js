@@ -1,3 +1,15 @@
+window.addEventListener("load", function () {
+    const preloader = document.getElementById("preloader");
+    const content = document.getElementById("content");
+
+    // Oculta o preloader quando a página estiver totalmente carregada
+    preloader.classList.add("hidden");
+
+    // Exibe o conteúdo principal
+    content.style.display = "block";
+});
+
+
 document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => {
         AOS.init();
@@ -120,26 +132,37 @@ document.addEventListener("DOMContentLoaded", function () {
     // Validação e envio do formulário
     document.getElementById('contact-form-submit').addEventListener('submit', function (e) {
         e.preventDefault(); // Previne o envio real do formulário
-        const form = document.getElementById('contact-form-submit');
-
+    
         let isValid = true; // Flag para validar o formulário
-
+    
         // Remove mensagens de erro anteriores
         const errorMessages = document.querySelectorAll('.error-message');
         errorMessages.forEach(msg => msg.remove());
-
+    
+        // Remove classes de erro anteriores
+        const errorFields = document.querySelectorAll('.error');
+        errorFields.forEach(field => field.classList.remove('error'));
+    
         // Lista dos campos obrigatórios
         const requiredFields = ['name', 'email', 'phone', 'agree'];
-
+    
         requiredFields.forEach(fieldId => {
             const input = document.getElementById(fieldId);
             let errorMessage = '';
-
-            // Valida cada campo
-            if (fieldId === 'agree' && !input.checked) {
-                isValid = false;
-                errorMessage = '';
-            } else if (!input.value.trim()) {
+    
+            // Valida o checkbox
+            if (fieldId === 'agree') {
+                const checkboxContainer = input.closest('.agree div');
+                if (!input.checked) {
+                    isValid = false;
+                    errorMessage = '';
+                    checkboxContainer.classList.add('error');
+                } else {
+                    checkboxContainer.classList.remove('error');
+                }
+            } 
+            // Valida outros campos
+            else if (!input.value.trim()) {
                 isValid = false;
                 errorMessage = `${input.placeholder} is required.`;
             } else if (fieldId === 'email') {
@@ -150,28 +173,37 @@ document.addEventListener("DOMContentLoaded", function () {
                     errorMessage = 'Please enter a valid email address.';
                 }
             }
-
+    
             // Exibe a mensagem de erro
             if (errorMessage) {
-                input.style.border = '2px solid red';
-                const errorElement = document.createElement('p');
-                errorElement.className = 'error-message';
-                errorElement.style.color = 'red';
-                errorElement.style.fontSize = '12px';
-                errorElement.textContent = errorMessage;
-                input.insertAdjacentElement('afterend', errorElement);
+                if (fieldId === 'agree') {
+                    const errorElement = document.createElement('p');
+                    errorElement.className = 'error-message';
+                    errorElement.style.color = 'red';
+                    errorElement.style.fontSize = '12px';
+                    errorElement.textContent = errorMessage;
+                    input.closest('.agree').appendChild(errorElement);
+                } else {
+                    input.style.border = '2px solid red';
+                    const errorElement = document.createElement('p');
+                    errorElement.className = 'error-message';
+                    errorElement.style.color = 'red';
+                    errorElement.style.fontSize = '12px';
+                    errorElement.textContent = errorMessage;
+                    input.insertAdjacentElement('afterend', errorElement);
+                }
             } else {
-                input.style.border = '';
+                if (fieldId !== 'agree') input.style.border = '';
             }
         });
-
+    
         // Se o formulário for válido, prossegue com a execução
         if (isValid) {
             const name = document.getElementById('name').value;
             localStorage.setItem('userName', name); // Armazena o nome no localStorage
             location.reload(); // Recarrega a página
         }
-    });
+    });    
 
     // Após o carregamento da página
     window.addEventListener('load', function () {
