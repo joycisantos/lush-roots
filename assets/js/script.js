@@ -7,15 +7,15 @@ window.addEventListener("load", function () {
 
     // Exibe o conteúdo principal
     content.style.display = "block";
+
+    AOS.init({
+        delay: 600, // Exemplo de configuração
+        duration: 1500
+    });
 });
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    setTimeout(() => {
-        AOS.init();
-    }, 100);
-
-
     // Função para inicializar o contador regressivo
     (function () {
         const second = 1000,
@@ -132,24 +132,24 @@ document.addEventListener("DOMContentLoaded", function () {
     // Validação e envio do formulário
     document.getElementById('contact-form-submit').addEventListener('submit', function (e) {
         e.preventDefault(); // Previne o envio real do formulário
-    
+
         let isValid = true; // Flag para validar o formulário
-    
+
         // Remove mensagens de erro anteriores
         const errorMessages = document.querySelectorAll('.error-message');
         errorMessages.forEach(msg => msg.remove());
-    
+
         // Remove classes de erro anteriores
         const errorFields = document.querySelectorAll('.error');
         errorFields.forEach(field => field.classList.remove('error'));
-    
+
         // Lista dos campos obrigatórios
         const requiredFields = ['name', 'email', 'phone', 'agree'];
-    
+
         requiredFields.forEach(fieldId => {
             const input = document.getElementById(fieldId);
             let errorMessage = '';
-    
+
             // Valida o checkbox
             if (fieldId === 'agree') {
                 const checkboxContainer = input.closest('.agree div');
@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 } else {
                     checkboxContainer.classList.remove('error');
                 }
-            } 
+            }
             // Valida outros campos
             else if (!input.value.trim()) {
                 isValid = false;
@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     errorMessage = 'Please enter a valid email address.';
                 }
             }
-    
+
             // Exibe a mensagem de erro
             if (errorMessage) {
                 if (fieldId === 'agree') {
@@ -196,14 +196,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (fieldId !== 'agree') input.style.border = '';
             }
         });
-    
+
         // Se o formulário for válido, prossegue com a execução
         if (isValid) {
             const name = document.getElementById('name').value;
             localStorage.setItem('userName', name); // Armazena o nome no localStorage
             location.reload(); // Recarrega a página
         }
-    });    
+    });
 
     // Após o carregamento da página
     window.addEventListener('load', function () {

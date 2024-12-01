@@ -982,3 +982,9 @@ footer .footer-second-part .copy p {
 .agree div.error input {
     border-color: red !important;
 }
+
+[data-aos] {
+    opacity: 1; /* Garantir que o conteúdo seja renderizado */
+    transform: none;
+    transition: none;
+}
