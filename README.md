@@ -42,7 +42,7 @@
 
 ###
 
-<p align="left">Inclua aqui uma imagem ou GIF do seu projeto em ação, ou um link para a versão publicada no GitHub Pages:<br><br></p>
+
  <a href="https://joycisantos.github.io/lush-roots/" target="_blank">
  🔗 Veja o projeto online
  </a>
