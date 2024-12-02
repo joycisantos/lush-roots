@@ -68,6 +68,10 @@ document.addEventListener("DOMContentLoaded", function () {
             nextEl: '.swiper-button-testmonials-next',
             prevEl: '.swiper-button-testmonials-prev',
         },
+        pagination: {
+            el: '.swiper-pagination-testmonials',
+            clickable: true,
+        },
         breakpoints: {
             500: {
                 slidesPerView: 1,
