@@ -34,7 +34,7 @@
 
 ###
 
-<p align="left">- Animações suaves: Elementos ganham destaque conforme o usuário navega.<br><br>- Galerias interativas: Navegação e zoom em imagens.<br><br>Sliders dinâmicos: Exibição de conteúdo de forma compacta e visualmente atraente.<br><br>- Formulário de contato: Captura dados dos usuários para personalização do atendimento.</p>
+<p align="left">- Animações suaves: Elementos ganham destaque conforme o usuário navega.<br><br>- Galerias interativas: Navegação e zoom em imagens.<br><br>- Sliders dinâmicos: Exibição de conteúdo de forma compacta e visualmente atraente.<br><br>- Formulário de contato: Captura dados dos usuários para personalização do atendimento.</p>
 
 ###
 

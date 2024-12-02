@@ -1,12 +1,8 @@
 window.addEventListener("load", function () {
     const preloader = document.getElementById("preloader");
-    const content = document.getElementById("content");
 
     // Oculta o preloader quando a página estiver totalmente carregada
     preloader.classList.add("hidden");
-
-    // Exibe o conteúdo principal
-    content.style.display = "block";
 });
 
 
