@@ -132,24 +132,24 @@ document.addEventListener("DOMContentLoaded", function () {
     // Validação e envio do formulário
     document.getElementById('contact-form-submit').addEventListener('submit', function (e) {
         e.preventDefault(); // Previne o envio real do formulário
-    
+
         let isValid = true; // Flag para validar o formulário
-    
+
         // Remove mensagens de erro anteriores
         const errorMessages = document.querySelectorAll('.error-message');
         errorMessages.forEach(msg => msg.remove());
-    
+
         // Remove classes de erro anteriores
         const errorFields = document.querySelectorAll('.error');
         errorFields.forEach(field => field.classList.remove('error'));
-    
+
         // Lista dos campos obrigatórios
         const requiredFields = ['name', 'email', 'phone', 'agree'];
-    
+
         requiredFields.forEach(fieldId => {
             const input = document.getElementById(fieldId);
             let errorMessage = '';
-    
+
             // Valida o checkbox
             if (fieldId === 'agree') {
                 const checkboxContainer = input.closest('.agree div');
@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 } else {
                     checkboxContainer.classList.remove('error');
                 }
-            } 
+            }
             // Valida outros campos
             else if (!input.value.trim()) {
                 isValid = false;
@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     errorMessage = 'Please enter a valid email address.';
                 }
             }
-    
+
             // Exibe a mensagem de erro
             if (errorMessage) {
                 if (fieldId === 'agree') {
@@ -196,14 +196,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (fieldId !== 'agree') input.style.border = '';
             }
         });
-    
+
         // Se o formulário for válido, prossegue com a execução
         if (isValid) {
             const name = document.getElementById('name').value;
             localStorage.setItem('userName', name); // Armazena o nome no localStorage
             location.reload(); // Recarrega a página
         }
-    });    
+    });
 
     // Após o carregamento da página
     window.addEventListener('load', function () {
@@ -232,22 +232,25 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Máscara de telefone
+    // Máscara de telefone no padrão brasileiro
     const phoneInput = document.getElementById('phone');
-    phoneInput.addEventListener('input', function (e) {
+    phoneInput.addEventListener('input', function () {
         let phoneValue = phoneInput.value.replace(/\D/g, ''); // Remove caracteres não numéricos
 
-        // Limita o número de caracteres e aplica a máscara
-        if (phoneValue.length > 10) {
-            phoneValue = phoneValue.slice(0, 10);
+        // Limita o número de caracteres a 11 (incluindo o DDD e 9 dígitos)
+        if (phoneValue.length > 11) {
+            phoneValue = phoneValue.slice(0, 11);
         }
 
-        if (phoneValue.length <= 3) {
+        // Aplica a máscara no formato brasileiro
+        if (phoneValue.length <= 2) {
             phoneValue = `(${phoneValue}`;
         } else if (phoneValue.length <= 6) {
-            phoneValue = `(${phoneValue.slice(0, 3)}) ${phoneValue.slice(3)}`;
+            phoneValue = `(${phoneValue.slice(0, 2)}) ${phoneValue.slice(2)}`;
+        } else if (phoneValue.length <= 10) {
+            phoneValue = `(${phoneValue.slice(0, 2)}) ${phoneValue.slice(2, 6)}-${phoneValue.slice(6)}`;
         } else {
-            phoneValue = `(${phoneValue.slice(0, 3)}) ${phoneValue.slice(3, 6)}-${phoneValue.slice(6)}`;
+            phoneValue = `(${phoneValue.slice(0, 2)}) ${phoneValue.slice(2, 7)}-${phoneValue.slice(7)}`;
         }
 
         phoneInput.value = phoneValue;
