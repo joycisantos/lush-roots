@@ -817,6 +817,10 @@ img {
     color: var(--white);
 }
 
+.section-count #countdown ul {
+    padding-left: 0;
+}
+
 .section-count #countdown li {
     display: inline-block;
     font-size: 30px;
