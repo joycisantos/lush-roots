@@ -303,7 +303,7 @@ img {
 
 @media(max-width: 991px) {
     #header .navbar-brand {
-        max-width: 250px;
+        max-width: 50%;
     }
 }
 
@@ -376,6 +376,12 @@ img {
 @media(max-width: 1600px) {
     .banner {
         margin-top: 94px;
+    }
+}
+
+@media(max-width: 991px) {
+    .banner {
+        margin-top: 82px;
     }
 }
 
