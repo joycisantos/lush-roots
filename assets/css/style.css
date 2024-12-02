@@ -283,7 +283,7 @@ img {
 
 @media(max-width: 991px) {
     #header {
-        padding: 10px 0 5px 0;
+        padding: 15px 0 5px 0;
     }
 }
 
@@ -360,11 +360,12 @@ img {
 @media(max-width: 991px) {
     #header #output {
         position: absolute;
-        top: -10px;
+        top: -14px;
         right: 0;
         left: 0;
         margin: 0 auto;
         text-align: center;
+        font-size: 14px;    
     }
 }
 
